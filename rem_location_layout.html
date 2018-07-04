@@ -1,0 +1,98 @@
+<!--------------------------------
+    company : Dilusense
+     author : Kuangch
+       date : 2018/6/6
+-------------------------------->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .box{
+            width: 25rem;
+            height: 25rem;
+            background: blue;
+            position: relative;
+            margin-left: 5rem;
+            margin-top: 5rem;
+        }
+
+        .inner{
+            width: 15rem;
+            height: 15rem;
+            background: red;
+            position: absolute;
+            left: 3rem;
+            top:3rem;
+
+        }
+        .inner2{
+            width: 15rem;
+            height: 15rem;
+            background: black;
+            position: fixed;
+            left: 3rem;
+            top:3rem;
+
+        }
+
+        .min{
+            width: 10rem;
+            height: 10rem;
+            background: yellow;
+            position: absolute;
+
+            left: 1.5rem;
+            top: 1.5rem;
+
+            /*l/r/t/b 为0 和无的区别*/
+            /*left: 0;*/
+            /*top: 0;*/
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <div class="inner">
+            <div class="min"></div>
+        </div>
+
+        <div class="inner2"></div>
+    </div>
+
+<script>
+    (function(win) {
+        var doc = win.document;
+        var docEl = doc.documentElement;
+        var tid;
+
+        function refreshRem() {
+            var width = docEl.getBoundingClientRect().width;
+            var rem = width / 32;
+            docEl.style.fontSize = rem + 'px';
+            console.log(rem);
+        }
+
+        win.addEventListener('resize', function() {
+            clearTimeout(tid);
+            tid = setTimeout(refreshRem, 100);
+        }, false);
+
+        refreshRem();
+
+    })(window);
+</script>
+
+</body>
+</html>
