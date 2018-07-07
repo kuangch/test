@@ -1,0 +1,79 @@
+<!--------------------------------
+    company : Dilusense
+     author : Kuangch
+       date : 2018/7/7
+-------------------------------->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .outer {
+            /*overflow: hidden;*/
+            border: green 5px solid;
+        }
+
+        .box {
+            background: gainsboro;
+            margin: 10px;
+            padding: 10px;
+            border: black 5px solid;
+            position: relative;
+            float: left;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .outer:after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .l {
+            float: left;
+            width: 100px;
+            height: 100px;
+        }
+
+        .c1 {
+            background: red;
+        }
+
+        .c2 {
+            background: blue;
+        }
+
+        .c3 {
+            background: yellow;
+        }
+
+        /*.clear {*/
+            /*clear: both;*/
+        /*}*/
+
+    </style>
+</head>
+<body>
+
+<div style="background: grey">
+    out1
+</div>
+<div class="outer">
+    <div class="box">
+        <div class="l c1"></div>
+        <div class="l c2"></div>
+        <div class="l c3"></div>
+    </div>
+
+    <!--<div class="clear"></div>-->
+</div>
+
+<div style="background: grey">
+    out2
+</div>
+
+</body>
+</html>
