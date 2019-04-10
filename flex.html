@@ -1,0 +1,75 @@
+<!--------------------------------
+    company : Dilusense
+     author : Kuangch
+       date : 2018/9/7
+-------------------------------->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer{
+            flex-basis: 100px;
+            background: grey;
+        }
+        .nav{
+            background: red;
+        }
+        .ads{
+            background: blue;
+        }
+
+
+        body{
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .content{
+            display: flex;
+            flex: 2;
+        }
+
+        .main{
+            flex: 1;
+            background: white;
+        }
+
+        .nav{
+            flex: 0 0 10rem;
+        }
+
+        .ads{
+            flex: 0 0 5rem;
+        }
+
+        @media (max-width: 800px) {
+            .content{
+                flex-direction: column;
+            }
+            .nav,.ads.main{
+                flex: auto;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<header></header>
+<div class="content">
+    <div class="nav">nav</div>
+    <div class="main">main</div>
+    <div class="ads">ads</div>
+</div>
+<footer></footer>
+</body>
+</html>

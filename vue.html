@@ -1,0 +1,116 @@
+<!--------------------------------
+    company : Dilusense
+     author : Kuangch
+       date : 2018/9/3
+-------------------------------->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    // observer
+    class Observer{
+        constructor (data){
+            this.walk(data);
+        }
+
+        walk (data){
+            let keys = Object.keys(data)
+            for(let i = 0; i < keys.length; i++){
+                defineReactive(data,keys[i],data[keys[i]])
+            }
+
+        }
+    }
+
+    class Dep{
+        constructor(){
+            this.subs = []
+        }
+        depend(){
+            this.subs.push(Dep.target)
+        }
+        notify(){
+            for(let i = 0; i< this.subs.length; i++){
+                this.subs[i].fn()
+            }
+        }
+    }
+
+    Dep.target = null
+
+    class Watcher{
+        constructor(data,exp,fn){
+            this.exp = exp
+            this.fn = fn
+            pushTarget(this)
+            data[exp]
+        }
+    }
+
+
+    function pushTarget(watcher) {
+        Dep.target = watcher
+    }
+
+    function defineReactive(data,key,val){
+
+        observer(val)
+
+        let dep = new Dep()
+        Object.defineProperty(data,key,{
+            enumerable: true,
+            configurable: true,
+            get: function () {
+                dep.depend()
+                return val
+            },
+            set: function (newVal) {
+                if(newVal === val){
+                    return
+                }
+                observer(newVal)
+                dep.notify()
+            }
+        })
+
+    }
+    
+    function observer(data) {
+        if(Object.prototype.toString.call(data) !== '[object Object]') {
+            return
+        }
+        new Observer(data)
+    }
+
+    var data = {
+        a:1,
+        b:2,
+        c:{
+            d:3
+        }
+    }
+    observer(data)
+
+    new Watcher(data,'a',function () {
+        console.log('watch a: ' + data['a'])
+    })
+
+    new Watcher(data,'b',function () {
+        console.log('watch b: ' + data['b'])
+    })
+
+    // new Watcher(data,'c.d',function () {
+    //     console.log('watch c.d: ' + data['c']['d'])
+    // })
+
+</script>
+
+</body>
+</html>
